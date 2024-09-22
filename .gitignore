@@ -1,2 +1,2 @@
-./config/piper/*
-./config/whisper/*
+config/piper/*
+config/whisper/*
