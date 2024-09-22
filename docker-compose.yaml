@@ -1,0 +1,31 @@
+services:
+
+  wyoming-piper-en:
+    image: rhasspy/wyoming-piper
+    container_name: piper
+    ports:
+      - 10200:10200
+    volumes:
+      - ./config/piper:/data
+    command: --voice en_US-masterchief-medium
+
+  wyoming-whisper-en:
+    image: rhasspy/wyoming-whisper
+    container_name: whisper
+    ports:
+      - 10300:10300
+    volumes:
+      - ./config/whisper:/data
+      - /usr/lib/x86_64-linux-gnu/libcudnn_ops_infer.so.8:/usr/lib/x86_64-linux-gnu/libcudnn_ops_infer.so.8:ro
+      - /usr/lib/x86_64-linux-gnu/libcudnn_cnn_infer.so.8:/usr/lib/x86_64-linux-gnu/libcudnn_cnn_infer.so.8:ro
+      - /usr/lib/x86_64-linux-gnu/libcublasLt.so.11:/usr/lib/x86_64-linux-gnu/libcublasLt.so.12:ro
+      - /usr/lib/x86_64-linux-gnu/libcublas.so.11:/usr/lib/x86_64-linux-gnu/libcublas.so.12:ro
+    command: --model medium-int8 --language en --beam-size 5 --device cuda
+    runtime: nvidia
+    deploy:
+        resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                count: 1
+                capabilities: [gpu]
