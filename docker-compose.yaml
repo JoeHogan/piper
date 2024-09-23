@@ -7,7 +7,14 @@ services:
       - 10200:10200
     volumes:
       - ./config/piper:/data
-    command: --voice en_US-masterchief-medium
+    command: --cuda --voice en_US-masterchief-medium
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1 # number of GPUs
+              capabilities: [gpu]
 
   wyoming-whisper-en:
     image: rhasspy/wyoming-whisper
@@ -22,7 +29,7 @@ services:
       - /usr/lib/x86_64-linux-gnu/libcublasLt.so.11:/usr/lib/x86_64-linux-gnu/libcublasLt.so.12:ro
       - /usr/lib/x86_64-linux-gnu/libcublas.so.11:/usr/lib/x86_64-linux-gnu/libcublas.so.12:ro
     command: --model medium-int8 --language en --beam-size 5 --device cuda
-    deploy:    # <------------- Add this section
+    deploy:
       resources:
         reservations:
           devices:
