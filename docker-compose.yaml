@@ -7,14 +7,7 @@ services:
       - 10200:10200
     volumes:
       - ./config/piper:/data
-    command: --cuda --voice en_US-masterchief-medium
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1 # number of GPUs
-              capabilities: [gpu]
+    command: --voice en_US-masterchief-medium
 
   wyoming-whisper-en:
     image: rhasspy/wyoming-whisper
