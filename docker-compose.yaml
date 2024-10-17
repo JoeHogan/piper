@@ -1,5 +1,17 @@
 services:
 
+  openwakeword:
+    container_name: openwakeword
+    image: rhasspy/wyoming-openwakeword
+    volumes:
+      - ./config/openwakeword/custom:/custom
+      - ./config/openwakeword/config:/config
+    ports:
+      - 10400:10400
+      - 10400:10400/udp
+    command: --preload-model 'ok_nabu' --custom-model-dir /custom
+    restart: unless-stopped
+
   wyoming-piper-en:
     image: rhasspy/wyoming-piper
     container_name: piper
