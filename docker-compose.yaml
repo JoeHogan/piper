@@ -24,7 +24,7 @@ services:
 
   wyoming-whisper-en:
     container_name: whisper
-    image: lscr.io/linuxserver/faster-whisper:latest
+    image: lscr.io/linuxserver/faster-whisper:gpu
     environment:
       - PUID=1000
       - PGID=1000
