@@ -24,8 +24,14 @@ services:
 
   wyoming-whisper-en:
     container_name: whisper
-    image: abtools/wyoming-whisper-cuda:latest
-    command: --model medium-int8 --language en --beam-size 5 --device cuda
+    image: lscr.io/linuxserver/faster-whisper:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WHISPER_MODEL=medium-int8
+      - WHISPER_BEAM=5 #optional
+      - WHISPER_LANG=en #optional
     volumes:
       - ./config/whisper:/data
     restart: always
