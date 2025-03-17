@@ -23,7 +23,7 @@ services:
     command: --voice en_US-masterchief-medium
 
   wyoming-whisper-en:
-    image: rhasspy/wyoming-whisper
+    image: rhasspy/wyoming-whisper:latest
     container_name: whisper
     privileged: true
     restart: always
