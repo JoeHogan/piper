@@ -12,15 +12,28 @@ services:
     command: --preload-model 'ok_nabu' --custom-model-dir /custom
     restart: unless-stopped
 
-  wyoming-piper-en:
-    image: rhasspy/wyoming-piper
+  wyoming-piper-en:  
+    image: slackr31337/wyoming-piper-gpu:latest  
     container_name: piper
-    restart: always
-    ports:
+    environment:  
+      - PIPER_VOICE=en_US-masterchief-medium
+    ports:  
       - 10200:10200
     volumes:
-      - ./config/piper:/data
-    command: --voice en_US-masterchief-medium
+      - ./config/piper:/data  
+    restart: always
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+                - utility
+                - compute
+
 
   wyoming-whisper-en:
     container_name: whisper
