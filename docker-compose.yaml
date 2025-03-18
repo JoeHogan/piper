@@ -17,6 +17,10 @@ services:
     container_name: piper
     environment:  
       - PIPER_VOICE=en_US-masterchief-medium
+      - PIPER_LENGTH="1.3"
+      - PIPER_NOISE="0.667"
+      - PIPER_NOISEW="0.8"
+      - PIPER_SILENCE="2"
     ports:  
       - 10200:10200
     volumes:
