@@ -46,7 +46,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - WHISPER_MODEL=medium.en-int8
+      - WHISPER_MODEL=medium.en
       - WHISPER_BEAM=5 #optional
       - WHISPER_LANG=en #optional
     volumes:
