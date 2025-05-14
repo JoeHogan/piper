@@ -25,7 +25,7 @@ services:
       - 10200:10200
     volumes:
       - ./config/piper:/data  
-    restart: always
+    restart: unless-stopped
     runtime: nvidia
     deploy:
       resources:
@@ -50,8 +50,8 @@ services:
       - WHISPER_BEAM=5 #optional
       - WHISPER_LANG=en #optional
     volumes:
-      - ./config/whisper:/data
-    restart: always
+      - ./config/whisper:/config
+    restart: unless-stopped
     ports:
       - 10300:10300
     runtime: nvidia
