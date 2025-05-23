@@ -33,11 +33,7 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities:
-                - gpu
-                - utility
-                - compute
-
+              capabilities: [gpu]
 
   wyoming-whisper-en:
     container_name: whisper
@@ -56,9 +52,9 @@ services:
       - 10300:10300
     runtime: nvidia
     deploy:
-        resources:
-          reservations:
-            devices:
-              - driver: nvidia
-                count: 1
-                capabilities: [gpu]
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
